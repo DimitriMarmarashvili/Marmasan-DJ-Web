@@ -255,9 +255,10 @@ img {
 }
 
 .hero-image-frame::before {
-  inset: -2px;
+  inset: -0.42rem;
   z-index: 2;
   padding: 2px;
+  border-radius: calc(1.8rem + 0.42rem);
   background:
     conic-gradient(from var(--edge-angle, 0deg),
       transparent 0deg,
@@ -284,8 +285,8 @@ img {
 }
 
 .hero-image-frame::after {
-  inset: -0.85rem;
-  z-index: -1;
+  inset: -1.05rem;
+  z-index: 0;
   background:
     radial-gradient(circle at 18% 18%, rgba(255, 235, 188, 0.5), transparent 18%),
     radial-gradient(circle at 82% 22%, rgba(99, 225, 255, 0.34), transparent 20%),
@@ -637,19 +638,19 @@ h3 {
   position: absolute;
   left: 50%;
   top: 50%;
-  width: 6.4rem;
-  height: 6.4rem;
+  width: 5.45rem;
+  height: 5.45rem;
   border-radius: 50%;
   transform: translate(-50%, -50%);
   border: 1px solid rgba(255, 244, 186, 0.62);
   background:
     radial-gradient(circle at 34% 28%, rgba(255, 255, 242, 0.98) 0 12%, rgba(255, 234, 146, 0.96) 24%, rgba(255, 181, 58, 0.96) 55%, rgba(191, 98, 15, 0.9) 78%, rgba(84, 38, 0, 0.22) 100%);
   box-shadow:
-    inset -0.7rem -0.8rem 1.3rem rgba(142, 62, 0, 0.32),
-    inset 0.3rem 0.25rem 0.7rem rgba(255, 255, 240, 0.48),
-    0 0 1.2rem rgba(255, 209, 87, 0.72),
-    0 0 2.6rem rgba(255, 154, 40, 0.44),
-    0 0 5rem rgba(255, 199, 83, 0.18);
+    inset -0.55rem -0.62rem 1.05rem rgba(142, 62, 0, 0.32),
+    inset 0.24rem 0.2rem 0.56rem rgba(255, 255, 240, 0.48),
+    0 0 1.05rem rgba(255, 209, 87, 0.68),
+    0 0 2.15rem rgba(255, 154, 40, 0.38),
+    0 0 4rem rgba(255, 199, 83, 0.16);
   opacity: 1;
 }
 
@@ -663,8 +664,8 @@ h3 {
 }
 
 .galaxy-core::before {
-  width: 10.8rem;
-  height: 10.8rem;
+  width: 9rem;
+  height: 9rem;
   border-radius: 50%;
   background:
     radial-gradient(circle, rgba(255, 218, 109, 0.24), transparent 60%);
@@ -673,8 +674,8 @@ h3 {
 }
 
 .galaxy-core::after {
-  width: 7.8rem;
-  height: 7.8rem;
+  width: 6.7rem;
+  height: 6.7rem;
   border-radius: 50%;
   clip-path: none;
   background:
@@ -690,12 +691,13 @@ h3 {
   transform: translate(-50%, -50%);
   font-family: "Cormorant Garamond", serif;
   z-index: 1;
-  font-size: 1.34rem;
+  font-size: 1.22rem;
   font-weight: 700;
   letter-spacing: 0.14em;
-  color: rgba(19, 13, 5, 0.9);
+  color: rgba(255, 252, 239, 0.96);
   text-shadow:
-    0 1px 0 rgba(255, 244, 190, 0.24);
+    0 1px 2px rgba(35, 18, 0, 0.62),
+    0 0 10px rgba(255, 250, 226, 0.2);
 }
 
 .orbit {
@@ -765,8 +767,8 @@ h3 {
   position: absolute;
   left: 0;
   top: 0;
-  width: calc(var(--node-size) * 2.55);
-  height: calc(var(--node-size) * 2.55);
+  width: calc(var(--node-size) * 1.88);
+  height: calc(var(--node-size) * 1.88);
   transform: translate(-50%, -50%);
   border-radius: 50%;
   clip-path: none;
@@ -807,8 +809,8 @@ h3 {
   position: absolute;
   left: 0;
   top: 0;
-  width: calc(var(--node-size) * 4.6);
-  height: calc(var(--node-size) * 4.6);
+  width: calc(var(--node-size) * 3.7);
+  height: calc(var(--node-size) * 3.7);
   transform: translate(-50%, -50%) scale(0.7);
   border-radius: 50%;
   opacity: 0;
