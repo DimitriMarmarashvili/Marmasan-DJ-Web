@@ -5,6 +5,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const trackTriggers = Array.from(document.querySelectorAll(".track-trigger"));
   const latestReleaseCard = document.querySelector(".latest-release-card");
   const latestReleaseButton = document.querySelector(".latest-release-button");
+  const latestReleasePlayer = document.getElementById("latest-release-player");
   const player = document.getElementById("soundcloud-player");
   const activeTrackKicker = document.getElementById("active-track-kicker");
   const activeTrackTitle = document.getElementById("active-track-title");
@@ -161,8 +162,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
       lockedTrigger = latestTrackTrigger;
       latestReleaseCard?.classList.add("is-expanded");
+      latestReleasePlayer.src = buildEmbedUrl(latestTrackUrl, true);
       setActiveTrack(latestTrackTrigger, { autoPlay: true });
-      document.getElementById("listen")?.scrollIntoView({ behavior: "smooth", block: "start" });
     });
   }
 

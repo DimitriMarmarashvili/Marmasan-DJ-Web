@@ -65,25 +65,37 @@
     </section>
 
     <section class="latest-release-card panel-card focus-section" data-reveal>
-      <div class="latest-release-orb" aria-hidden="true" style="--release-cover: url('https://i1.sndcdn.com/artworks-OBTWzV3S2LtXNYqb-3p4D2g-t500x500.jpg');">
-        <span></span>
+      <div class="latest-release-cover" aria-hidden="true" style="--release-cover: url('https://i1.sndcdn.com/artworks-OBTWzV3S2LtXNYqb-3p4D2g-t500x500.jpg');">
+        <div class="latest-cover-image"></div>
       </div>
 
       <div class="latest-release-copy">
         <p class="eyebrow">Latest Release</p>
         <h2>Peak-Time Psytrance Trip - Marmasan Selects</h2>
         <p class="supporting-copy">
-          A prominent new planet in the Musical Dimensions system. Press play to open it in the main SoundCloud player.
+          A prominent new planet in the Musical Dimensions system. Press play to open an inline SoundCloud player.
         </p>
       </div>
 
-      <button
-        class="button button-primary latest-release-button"
-        type="button"
-        data-latest-track-url="https://soundcloud.com/marmasan/peak-time-psytrance-trip">
-        <span class="play-icon" aria-hidden="true"></span>
-        <span>Listen Now</span>
-      </button>
+      <div class="latest-release-action">
+        <button
+          class="button button-primary latest-release-button"
+          type="button"
+          data-latest-track-url="https://soundcloud.com/marmasan/peak-time-psytrance-trip">
+          <span class="play-icon" aria-hidden="true"></span>
+          <span>Listen Now</span>
+        </button>
+
+        <div class="latest-release-embed" aria-label="SoundCloud player for Peak-Time Psytrance Trip">
+          <iframe
+            id="latest-release-player"
+            title="SoundCloud player for Peak-Time Psytrance Trip - Marmasan Selects"
+            src=""
+            loading="lazy"
+            allow="autoplay">
+          </iframe>
+        </div>
+      </div>
     </section>
 
     <section id="listen" class="panel-card focus-section" data-reveal>
