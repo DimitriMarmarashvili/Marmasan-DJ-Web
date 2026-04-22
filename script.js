@@ -3,6 +3,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const revealItems = Array.from(document.querySelectorAll("[data-reveal]"));
   const focusSections = Array.from(document.querySelectorAll(".focus-section"));
   const trackTriggers = Array.from(document.querySelectorAll(".track-trigger"));
+  const latestReleaseCard = document.querySelector(".latest-release-card");
+  const latestReleaseButton = document.querySelector(".latest-release-button");
   const player = document.getElementById("soundcloud-player");
   const activeTrackKicker = document.getElementById("active-track-kicker");
   const activeTrackTitle = document.getElementById("active-track-title");
@@ -23,10 +25,10 @@ document.addEventListener("DOMContentLoaded", () => {
   let lockedTrigger = null;
   let foregroundFrame = null;
 
-  const buildEmbedUrl = trackUrl =>
-    `https://w.soundcloud.com/player/?url=${encodeURIComponent(trackUrl)}&color=%23d59a2d&auto_play=false&hide_related=true&show_comments=false&show_user=true&show_reposts=false&show_teaser=false&visual=false`;
+  const buildEmbedUrl = (trackUrl, autoPlay = false) =>
+    `https://w.soundcloud.com/player/?url=${encodeURIComponent(trackUrl)}&color=%23d59a2d&auto_play=${autoPlay ? "true" : "false"}&hide_related=true&show_comments=false&show_user=true&show_reposts=false&show_teaser=false&visual=false`;
 
-  const setActiveTrack = trigger => {
+  const setActiveTrack = (trigger, options = {}) => {
     trackTriggers.forEach(item => {
       item.classList.toggle("is-active", item === trigger);
       item.setAttribute("aria-pressed", item === trigger ? "true" : "false");
@@ -42,7 +44,11 @@ document.addEventListener("DOMContentLoaded", () => {
     activeTrackDescription.textContent = trigger.dataset.trackDescription;
     activeTrackLink.href = trigger.dataset.trackUrl;
     activeTrackNote.textContent = trigger.dataset.trackNote;
-    player.src = buildEmbedUrl(trigger.dataset.trackUrl);
+    player.src = buildEmbedUrl(trigger.dataset.trackUrl, Boolean(options.autoPlay));
+    latestReleaseCard?.classList.toggle(
+      "is-expanded",
+      latestReleaseButton?.dataset.latestTrackUrl === trigger.dataset.trackUrl
+    );
   };
 
   const setHoveredOrbit = orbitToHighlight => {
@@ -143,6 +149,22 @@ document.addEventListener("DOMContentLoaded", () => {
       setHoveredOrbit(null);
     });
   });
+
+  if (latestReleaseButton) {
+    latestReleaseButton.addEventListener("click", () => {
+      const latestTrackUrl = latestReleaseButton.dataset.latestTrackUrl;
+      const latestTrackTrigger = trackTriggers.find(trigger => trigger.dataset.trackUrl === latestTrackUrl);
+
+      if (!latestTrackTrigger) {
+        return;
+      }
+
+      lockedTrigger = latestTrackTrigger;
+      latestReleaseCard?.classList.add("is-expanded");
+      setActiveTrack(latestTrackTrigger, { autoPlay: true });
+      document.getElementById("listen")?.scrollIntoView({ behavior: "smooth", block: "start" });
+    });
+  }
 
   if (galaxyMap && orbits.length) {
     const orbitHoverThreshold = 18;

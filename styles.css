@@ -496,28 +496,77 @@ h3 {
 }
 
 .latest-release-card {
+  position: relative;
   display: grid;
   grid-template-columns: auto minmax(0, 1fr) auto;
   align-items: center;
   gap: 1rem;
   min-height: 10rem;
+  overflow: hidden;
   background:
     radial-gradient(circle at 10% 50%, rgba(255, 210, 104, 0.18), transparent 20%),
     radial-gradient(circle at 62% 22%, rgba(112, 158, 255, 0.14), transparent 26%),
     radial-gradient(circle at 86% 68%, rgba(181, 114, 255, 0.14), transparent 24%),
     linear-gradient(135deg, rgba(3, 5, 14, 0.94), rgba(8, 9, 26, 0.9));
+  transition:
+    min-height 360ms ease,
+    transform 260ms ease,
+    box-shadow 260ms ease,
+    border-color 260ms ease;
+}
+
+.latest-release-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  padding: 1px;
+  border-radius: inherit;
+  pointer-events: none;
+  background:
+    conic-gradient(from var(--edge-angle, 0deg),
+      transparent 0deg 36deg,
+      rgba(255, 245, 216, 0.88) 58deg,
+      rgba(255, 196, 84, 0.72) 72deg,
+      rgba(107, 215, 255, 0.52) 90deg,
+      rgba(177, 112, 255, 0.42) 106deg,
+      transparent 142deg 360deg);
+  mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  mask-composite: exclude;
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  opacity: 0;
+  filter:
+    drop-shadow(0 0 0.55rem rgba(255, 226, 150, 0.42))
+    drop-shadow(0 0 1.4rem rgba(119, 207, 255, 0.18));
+  animation: latest-release-stroke 7.5s ease-in-out infinite;
+}
+
+.latest-release-card.is-expanded {
+  min-height: 12.2rem;
+  border-color: rgba(255, 222, 141, 0.28);
+  box-shadow:
+    0 26px 82px rgba(0, 0, 0, 0.36),
+    0 0 2.4rem rgba(255, 206, 102, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
 }
 
 .latest-release-orb {
   position: relative;
-  width: clamp(4.7rem, 11vw, 6.3rem);
-  height: clamp(4.7rem, 11vw, 6.3rem);
+  width: clamp(5.7rem, 13vw, 7.6rem);
+  height: clamp(5.7rem, 13vw, 7.6rem);
   border-radius: 50%;
   background:
-    radial-gradient(circle at 34% 28%, rgba(255, 255, 244, 0.95), rgba(255, 222, 116, 0.94) 26%, rgba(220, 104, 28, 0.7) 58%, rgba(88, 49, 142, 0.34) 100%);
+    radial-gradient(circle at 32% 24%, rgba(255, 255, 255, 0.28), transparent 16%),
+    linear-gradient(140deg, rgba(255, 255, 255, 0.08), rgba(0, 0, 0, 0.18)),
+    var(--release-cover) center center / cover no-repeat;
   border: 1px solid rgba(255, 234, 174, 0.36);
   box-shadow:
-    inset -0.35rem -0.42rem 0.9rem rgba(77, 32, 0, 0.34),
+    inset -0.35rem -0.42rem 0.9rem rgba(0, 0, 0, 0.34),
+    inset 0.18rem 0.16rem 0.36rem rgba(255, 255, 255, 0.24),
     0 0 1rem rgba(255, 217, 109, 0.46),
     0 0 2.3rem rgba(170, 108, 255, 0.24),
     0 0 4rem rgba(97, 154, 255, 0.14);
@@ -544,11 +593,11 @@ h3 {
 
 .latest-release-orb span {
   position: absolute;
-  inset: 28%;
+  inset: 0;
   border-radius: 50%;
   background:
-    radial-gradient(circle, rgba(255, 252, 222, 0.95), rgba(255, 226, 128, 0.2) 54%, transparent 70%);
-  filter: blur(0.04rem);
+    radial-gradient(circle at 35% 22%, rgba(255, 255, 255, 0.3), transparent 18%),
+    radial-gradient(circle at 72% 80%, rgba(0, 0, 0, 0.35), transparent 42%);
 }
 
 .latest-release-copy {
@@ -569,7 +618,31 @@ h3 {
 }
 
 .latest-release-button {
-  min-width: 11.5rem;
+  min-width: 12.8rem;
+  gap: 0.7rem;
+  border-color: rgba(255, 229, 164, 0.34);
+}
+
+.play-icon {
+  width: 1.55rem;
+  height: 1.55rem;
+  display: inline-grid;
+  place-items: center;
+  border-radius: 50%;
+  background: rgba(255, 248, 229, 0.94);
+  box-shadow:
+    0 0 0.8rem rgba(255, 235, 176, 0.34),
+    inset 0 0 0 1px rgba(130, 83, 12, 0.12);
+}
+
+.play-icon::before {
+  content: "";
+  width: 0;
+  height: 0;
+  margin-left: 0.16rem;
+  border-top: 0.36rem solid transparent;
+  border-bottom: 0.36rem solid transparent;
+  border-left: 0.55rem solid #9c6817;
 }
 
 .section-heading {
@@ -666,7 +739,7 @@ h3 {
 
 .galaxy-map {
   position: relative;
-  min-height: 35rem;
+  min-height: 40rem;
   border-radius: 1.9rem;
   overflow: hidden;
   isolation: isolate;
@@ -1721,7 +1794,7 @@ h3 {
   }
 
   .galaxy-map {
-    min-height: 27.5rem;
+    min-height: 28rem;
   }
 
   .track-name {
@@ -1857,6 +1930,29 @@ h3 {
   82% {
     opacity: 0.2;
     transform: scale(1.012);
+  }
+}
+
+@keyframes latest-release-stroke {
+  0%,
+  54%,
+  100% {
+    --edge-angle: 0deg;
+    opacity: 0;
+  }
+
+  62% {
+    opacity: 0.48;
+  }
+
+  72% {
+    --edge-angle: 180deg;
+    opacity: 0.95;
+  }
+
+  84% {
+    --edge-angle: 360deg;
+    opacity: 0;
   }
 }
 
