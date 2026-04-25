@@ -337,6 +337,22 @@ img {
     radial-gradient(circle at 88% 12%, rgba(161, 104, 255, 0.1), transparent 18%);
 }
 
+.hero-copy-top {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.hero-release-cta {
+  display: grid;
+  justify-items: end;
+  gap: 0.55rem;
+  max-width: 16rem;
+}
+
+.hero-release-cta .eyebrow {
+  font-size: 0.68rem;
+}
+
 .heading-stack {
   display: grid;
   gap: 0.65rem;
@@ -498,7 +514,7 @@ h3 {
 .latest-release-card {
   position: relative;
   display: grid;
-  grid-template-columns: auto minmax(0, 1fr) minmax(16rem, 0.42fr);
+  grid-template-columns: auto minmax(0, 1fr) minmax(18rem, 0.48fr);
   align-items: center;
   gap: 1.15rem;
   min-height: 12rem;
@@ -634,7 +650,7 @@ h3 {
 .latest-release-action {
   display: grid;
   align-items: center;
-  gap: 0.8rem;
+  gap: 0;
 }
 
 .latest-release-embed {
@@ -659,13 +675,7 @@ h3 {
 }
 
 .latest-release-card.is-expanded .latest-release-button {
-  opacity: 0;
-  transform: translateY(-0.35rem) scale(0.96);
-  pointer-events: none;
-  max-height: 0;
-  min-height: 0;
-  padding-block: 0;
-  overflow: hidden;
+  display: none;
 }
 
 .latest-release-card.is-expanded .latest-release-embed {
@@ -1831,6 +1841,20 @@ h3 {
 
   .hero-copy {
     border-top: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .hero-copy-top {
+    justify-content: center;
+  }
+
+  .hero-release-cta {
+    width: 100%;
+    justify-items: center;
+    max-width: none;
+  }
+
+  .hero-latest-button {
+    width: 100%;
   }
 
   .latest-release-card {

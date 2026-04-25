@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const focusSections = Array.from(document.querySelectorAll(".focus-section"));
   const trackTriggers = Array.from(document.querySelectorAll(".track-trigger"));
   const latestReleaseCard = document.querySelector(".latest-release-card");
-  const latestReleaseButton = document.querySelector(".latest-release-button");
+  const latestReleaseButton = document.querySelector(".hero-latest-button");
   const latestReleasePlayer = document.getElementById("latest-release-player");
   const player = document.getElementById("soundcloud-player");
   const activeTrackKicker = document.getElementById("active-track-kicker");
@@ -126,6 +126,29 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   };
 
+  const openLatestRelease = ({ autoPlay = true, scrollToEmbed = false } = {}) => {
+    const latestTrackUrl = latestReleaseButton?.dataset.latestTrackUrl;
+    const latestTrackTrigger = trackTriggers.find(trigger => trigger.dataset.trackUrl === latestTrackUrl);
+
+    if (!latestTrackTrigger || !latestReleasePlayer) {
+      return;
+    }
+
+    lockedTrigger = latestTrackTrigger;
+    latestReleaseCard?.classList.add("is-expanded");
+    latestReleasePlayer.src = buildEmbedUrl(latestTrackUrl, autoPlay);
+    setActiveTrack(latestTrackTrigger, { autoPlay });
+
+    if (scrollToEmbed && latestReleaseCard) {
+      const targetTop = latestReleaseCard.getBoundingClientRect().top + window.scrollY - 96;
+
+      window.scrollTo({
+        top: Math.max(0, targetTop),
+        behavior: "smooth"
+      });
+    }
+  };
+
   trackTriggers.forEach(trigger => {
     const orbit = trigger.closest(".orbit");
 
@@ -153,17 +176,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   if (latestReleaseButton) {
     latestReleaseButton.addEventListener("click", () => {
-      const latestTrackUrl = latestReleaseButton.dataset.latestTrackUrl;
-      const latestTrackTrigger = trackTriggers.find(trigger => trigger.dataset.trackUrl === latestTrackUrl);
-
-      if (!latestTrackTrigger) {
-        return;
-      }
-
-      lockedTrigger = latestTrackTrigger;
-      latestReleaseCard?.classList.add("is-expanded");
-      latestReleasePlayer.src = buildEmbedUrl(latestTrackUrl, true);
-      setActiveTrack(latestTrackTrigger, { autoPlay: true });
+      openLatestRelease({ autoPlay: true, scrollToEmbed: true });
     });
   }
 
