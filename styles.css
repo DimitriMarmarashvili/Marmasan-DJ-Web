@@ -124,6 +124,64 @@ img {
   padding: 0.8rem 0 2rem;
 }
 
+.top-release-dock {
+  margin-top: 0;
+  margin-bottom: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+  max-height: 0;
+  min-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  transform: translateY(-1rem);
+  pointer-events: none;
+  transition:
+    max-height 420ms ease,
+    opacity 280ms ease,
+    transform 420ms ease,
+    padding 420ms ease,
+    margin-bottom 420ms ease;
+}
+
+.top-release-dock.is-open {
+  max-height: 18rem;
+  margin-bottom: 1rem;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.top-release-dock-copy,
+.top-release-dock-player {
+  position: relative;
+  z-index: 1;
+}
+
+.top-release-dock-copy {
+  display: grid;
+  gap: 0.25rem;
+  margin-bottom: 0.8rem;
+}
+
+.top-release-dock-title {
+  font-family: "Cormorant Garamond", serif;
+  font-size: clamp(1.4rem, 3vw, 2rem);
+  color: rgba(255, 247, 226, 0.96);
+  text-shadow:
+    0 0 12px rgba(255, 220, 142, 0.18),
+    0 0 28px rgba(117, 166, 255, 0.08);
+}
+
+.top-release-dock-player iframe {
+  width: 100%;
+  height: 166px;
+  border: 0;
+  border-radius: 1.15rem;
+  background: rgba(5, 7, 17, 0.74);
+}
+
 .hero-card,
 .panel-card,
 .site-footer {

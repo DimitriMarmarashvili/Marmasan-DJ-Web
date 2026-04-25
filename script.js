@@ -3,6 +3,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const revealItems = Array.from(document.querySelectorAll("[data-reveal]"));
   const focusSections = Array.from(document.querySelectorAll(".focus-section"));
   const trackTriggers = Array.from(document.querySelectorAll(".track-trigger"));
+  const topReleaseDock = document.querySelector(".top-release-dock");
+  const topReleasePlayer = document.getElementById("top-release-player");
   const latestReleaseCard = document.querySelector(".latest-release-card");
   const latestReleaseButton = document.querySelector(".hero-latest-button");
   const latestReleasePlayer = document.getElementById("latest-release-player");
@@ -126,7 +128,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   };
 
-  const openLatestRelease = ({ autoPlay = true, scrollToEmbed = false } = {}) => {
+  const openLatestRelease = ({ autoPlay = true, scrollToEmbed = false, openTopDock = false } = {}) => {
     const latestTrackUrl = latestReleaseButton?.dataset.latestTrackUrl;
     const latestTrackTrigger = trackTriggers.find(trigger => trigger.dataset.trackUrl === latestTrackUrl);
 
@@ -137,10 +139,20 @@ document.addEventListener("DOMContentLoaded", () => {
     lockedTrigger = latestTrackTrigger;
     latestReleaseCard?.classList.add("is-expanded");
     latestReleasePlayer.src = buildEmbedUrl(latestTrackUrl, autoPlay);
+    if (openTopDock && topReleaseDock && topReleasePlayer) {
+      topReleaseDock.classList.add("is-open");
+      topReleasePlayer.src = buildEmbedUrl(latestTrackUrl, autoPlay);
+    }
     setActiveTrack(latestTrackTrigger, { autoPlay });
 
-    if (scrollToEmbed && latestReleaseCard) {
-      const targetTop = latestReleaseCard.getBoundingClientRect().top + window.scrollY - 96;
+    if (scrollToEmbed) {
+      const scrollAnchor = openTopDock && topReleaseDock ? topReleaseDock : latestReleaseCard;
+
+      if (!scrollAnchor) {
+        return;
+      }
+
+      const targetTop = scrollAnchor.getBoundingClientRect().top + window.scrollY - 18;
 
       window.scrollTo({
         top: Math.max(0, targetTop),
@@ -176,7 +188,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   if (latestReleaseButton) {
     latestReleaseButton.addEventListener("click", () => {
-      openLatestRelease({ autoPlay: true, scrollToEmbed: true });
+      openLatestRelease({ autoPlay: true, scrollToEmbed: true, openTopDock: true });
     });
   }
 
