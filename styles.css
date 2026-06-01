@@ -1590,6 +1590,10 @@ h3 {
   gap: 0.9rem;
 }
 
+.vision-link-field {
+  grid-column: 1 / -1;
+}
+
 .vision-form label {
   display: grid;
   gap: 0.5rem;

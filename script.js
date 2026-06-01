@@ -251,7 +251,7 @@ document.addEventListener("DOMContentLoaded", () => {
     };
 
     const clearFormErrors = () => {
-      ["first_name", "email", "phone", "vision_scope"].forEach(fieldName => {
+      ["first_name", "email", "phone", "music_reference_link", "vision_scope"].forEach(fieldName => {
         setFieldError(fieldName, "");
       });
 
@@ -334,6 +334,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const firstName = String(formData.get("first_name") || "").trim();
       const email = String(formData.get("email") || "").trim();
       const phone = String(formData.get("phone") || "").trim();
+      const musicReferenceLink = String(formData.get("music_reference_link") || "").trim();
       const scope = String(formData.get("vision_scope") || "").trim();
       const payload = {
         access_key: String(formData.get("access_key") || "").trim(),
@@ -342,11 +343,13 @@ document.addEventListener("DOMContentLoaded", () => {
         name: firstName,
         email,
         phone,
+        music_reference_link: musicReferenceLink,
         vision_scope: scope,
         message: [
           `Name: ${firstName}`,
           `Email: ${email || "Not provided"}`,
           `Phone: ${phone || "Not provided"}`,
+          `Music Reference Link: ${musicReferenceLink || "Not provided"}`,
           "",
           "What is the scope of your Vision/Event?",
           scope
@@ -387,7 +390,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
-    ["first_name", "email", "phone", "vision_scope"].forEach(fieldName => {
+    ["first_name", "email", "phone", "music_reference_link", "vision_scope"].forEach(fieldName => {
       const field = visionForm.elements[fieldName];
 
       if (!field) {
